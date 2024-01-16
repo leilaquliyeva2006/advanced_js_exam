@@ -214,3 +214,15 @@ window.addEventListener("DOMContentLoaded", () => {
     tasksList.renderTasks();
   });
   
+  function handleDeleteBtn(taskId) {
+    const taskList = new TasksList();
+    const deleteBtn = Array.from(document.getElementsByClassName("deleteBtn"));
+    deleteBtn.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        if (taskId === btn.getAttribute("data-taskId")) {
+          taskList.deleteTask(taskId);
+        }
+      });
+    });
+  }
+  
