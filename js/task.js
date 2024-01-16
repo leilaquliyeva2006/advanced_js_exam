@@ -225,4 +225,15 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  function handleEditBtn(taskId) {
+    const taskList = new TasksList();
+    const editBtn = Array.from(document.getElementsByClassName("editBtn"));
+    editBtn.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        if (taskId === btn.getAttribute("data-taskId")) {
+          taskList.editTask(taskId);
+        }
+      });
+    });
+  }
   
