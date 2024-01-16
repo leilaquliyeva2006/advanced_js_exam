@@ -82,4 +82,46 @@ class Task {
     editTask(taskId) {
       window.location.href = `../html/edit.html?id=${taskId}`;
     }
+    
+  viewDetails(taskId) {
+    window.location.href = `../html/details.html?id=${taskId}`;
+  }
+
+  renderTasks(displayTasks) {
+    const tasksListContainer = document.getElementById("tasksList");
+    if (tasksListContainer) {
+      tasksListContainer.innerHTML = "";
+      let tasksToDisplay = [];
+      if (displayTasks) {
+        tasksToDisplay = displayTasks;
+      } else {
+        tasksToDisplay = JSON.parse(localStorage.getItem("tasks")) || [];
+      }
+      tasksToDisplay.forEach((task, index) => {
+        const taskDiv = document.createElement("div");
+        taskDiv.innerHTML = `
+                <p class="showDetails" data-taskId="${
+                  tasksToDisplay[index].id
+                }">Name: ${task.title}</p>
+                <p>Status: ${
+                  task.isCompleted ? "Completed" : "Not Completed"
+                }</p>
+                <button data-taskId="${
+                  tasksToDisplay[index].id
+                }" class="deleteBtn">Delete</button>
+                <button data-taskId="${
+                  tasksToDisplay[index].id
+                }" class="editBtn">Edit</button>
+            `;
+        tasksListContainer.appendChild(taskDiv);
+        handleDeleteBtn(tasksToDisplay[index].id);
+        handleEditBtn(tasksToDisplay[index].id);
+        handleDetailsBtn(tasksToDisplay[index].id);
+      });
+    }
+  }
+
+  updateLocalStorage(updatedTasks) {
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  }
 }
