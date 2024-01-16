@@ -173,6 +173,31 @@ class TaskForm {
         );
       }
     }
- 
+    handleFilterAndSortChange() {
+      const filterValue = this.filterSelect.value;
+      const sortValue = this.sortSelect.value;
+  
+      let filteredAndSortedTasks = [...this.tasksList.tasks];
+  
+      if (filterValue === "completed") {
+        filteredAndSortedTasks = filteredAndSortedTasks.filter(
+          (task) => task.isCompleted
+        );
+      } else if (filterValue === "not-completed") {
+        filteredAndSortedTasks = filteredAndSortedTasks.filter(
+          (task) => !task.isCompleted
+        );
+      }
+  
+      if (sortValue === "name") {
+        filteredAndSortedTasks.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sortValue === "date") {
+        filteredAndSortedTasks.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+      }
+  
+      this.tasksList.renderTasks(filteredAndSortedTasks);
+    }
   }
   
