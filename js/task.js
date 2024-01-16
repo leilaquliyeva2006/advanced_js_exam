@@ -236,4 +236,19 @@ window.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  function handleDetailsBtn(taskId) {
+    const taskList = new TasksList();
+    const detailsBtn = Array.from(document.getElementsByClassName("showDetails"));
+    detailsBtn.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        if (taskId === btn.getAttribute("data-taskId")) {
+          taskList.viewDetails(taskId);
+        }
+      });
+    });
+  }
+  
+  export { Task, TasksList, TaskForm, FilterAndSort };
+  
   
