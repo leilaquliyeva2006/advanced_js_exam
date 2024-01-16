@@ -151,3 +151,28 @@ class TaskForm {
       }
     }
   }
+
+  class FilterAndSort {
+    filteredTasks;
+  
+    constructor(filterSelect, sortSelect, tasksList) {
+      this.filterSelect = filterSelect;
+      this.sortSelect = sortSelect;
+      this.tasksList = tasksList;
+      this.filteredTasks = [...this.tasksList.tasks];
+  
+      if (filterSelect) {
+        this.filterSelect.addEventListener("change", () =>
+          this.handleFilterAndSortChange()
+        );
+      }
+  
+      if (sortSelect) {
+        this.sortSelect.addEventListener("change", () =>
+          this.handleFilterAndSortChange()
+        );
+      }
+    }
+ 
+  }
+  
