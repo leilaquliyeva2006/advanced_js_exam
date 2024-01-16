@@ -33,4 +33,16 @@ class Details {
         return `${day}.${month}.${year} ${hours}:${minutes}`;
     }
 
+    goToHome(){
+        const homeBtn = document.getElementById("Home");
+        if(homeBtn){
+            homeBtn.addEventListener("click", () => {
+                window.location.href = `../html/index.html`;
+            })
+        }
+    }
+
 }
+
+const details = new Details();
+details.renderTask();
