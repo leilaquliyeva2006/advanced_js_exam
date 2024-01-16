@@ -48,5 +48,38 @@ class Task {
     }
   }
   
-
+  class TasksList {
+    #tasks;
   
+    constructor() {
+      this.#tasks = [];
+    }
+  
+    get tasks() {
+      return this.#tasks;
+    }
+  
+    set tasks(tasks) {
+      return (this.#tasks = tasks);
+    }
+  
+    addTask(task) {
+      this.#tasks.push(task.task);
+      this.updateLocalStorage(this.#tasks);
+      this.renderTasks();
+    }
+  
+    deleteTask(taskId) {
+      const tasks = JSON.parse(localStorage.getItem("tasks"));
+      const objWithIdIndex = tasks.findIndex((obj) => obj.id === taskId);
+      if (objWithIdIndex > -1) {
+        tasks.splice(objWithIdIndex, 1);
+      }
+      this.renderTasks(tasks);
+      this.updateLocalStorage(tasks);
+    }
+  
+    editTask(taskId) {
+      window.location.href = `../html/edit.html?id=${taskId}`;
+    }
+}
