@@ -122,6 +122,32 @@ class Task {
   }
 
   updateLocalStorage(updatedTasks) {
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    localStorage.setItem("tasks", JSON. stringify(updatedTasks));
   }
 }
+
+class TaskForm {
+    constructor(formElement, tasksList) {
+      this.formElement = formElement;
+      this.tasksList = tasksList;
+  
+      this.formElement.addEventListener("submit", (event) =>
+        this.handleFormSubmission(event)
+      );
+    }
+  
+    handleFormSubmission(event) {
+      event.preventDefault();
+  
+      const name = document.getElementById("name").value;
+      const description = document.getElementById("description").value;
+  
+      if (name.trim() !== "" && description.trim() !== "") {
+        const newTask = new Task(name, description);
+        this.tasksList.addTask(newTask);
+        this.formElement.reset();
+      } else {
+        alert("Please fill in all inputs");
+      }
+    }
+  }
